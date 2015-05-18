@@ -1,0 +1,19 @@
+{
+  "name": "oryx",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ucesco/oryx"
+  },
+  "devDependencies": {
+    "gulp": "~3.8.11",
+    "gulp-jasmine": "~2.0.1",
+    "gulp-jasmine-browser": "~0.1.0"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ucesco/oryx/blob/master/LICENSE"
+    }
+  ],
+  "dependencies": {}
+}
