@@ -1,7 +1,7 @@
-"use strict";
+(function () {
+    "use strict";
 
-(funciton () {
-    var create_app = function (element) {
+    var createApp = function (element) {
         if (!element) {
             throw 'Unable to intiate Oryx application, please provide HTML element';
         }
@@ -11,5 +11,5 @@
         }
     }
 
-    window.ox = create_app;
-} ());
+    window.ox = createApp;
+}) ();
