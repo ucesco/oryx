@@ -56,4 +56,26 @@ describe("Router unit tests", function() {
         });
     });
 
+    describe("On Route Change", function() {
+        var router = new ox._Router();
+
+        it("should pass url to matcher", function() {
+            spyOn(router, '_match');
+            router._onRouteChange({newURL: ''});
+            expect(router._match).toHaveBeenCalled();
+        });
+    });
+
+    describe("Adding New Route", function() {
+        var router = new ox._Router();
+
+        it("should add first parameter string", function() {
+            router.addRoute('route');
+            expect(router._routes['route']).toBeDefined();
+        });
+
+
+    });
+
+
 });

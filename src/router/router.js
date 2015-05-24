@@ -3,16 +3,13 @@
 
     function Router () {
         this._routes = [];
+        this._parser = document.createElement('a');
 
         window.addEventListener('hashchange', this._onRouteChange);
     }
 
-    Router.prototype.match = function (url) {
-        
-    };
-
     Router.prototype.addRoute = function (pattern, callback) {
-        if (!this._isValid()) {
+        if (!this._isValid(pattern)) {
             throw pattern.toString() + ' is invalid.';
         }
 
@@ -29,8 +26,38 @@
         }
     };
 
+    Router.prototype._match = function (url) {
+        var routes = [];
+
+        this._parser.href = url;
+
+        for (var i = routes.length - 1; i >= 0; i--) {
+            _matchRoute(this._parser.href, routes[i]) && routes.push(routes[i]);
+        }
+
+        return routes;
+    };
+
+    Router.prototype._matchRoute = function (hash, route) {
+        if (route.pattern instanceof RegExp) {
+            return false;
+        } else {
+            return this._matchStringRoute(hash, route);
+        }
+    };
+
+    Router.prototype._matchStringRoute = function (hash, route) {
+        var result;
+
+        if (route.pattern instanceof RegExp) {
+            re
+        } else {
+            route.pattern === hash;
+        }
+    };
+
     Router.prototype._onRouteChange = function (e) {
-        this.match(e.newURL);
+        this._match(e.newURL);
     };
 
     Router.prototype._findRoute = function (pattern) {
