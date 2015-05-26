@@ -8,7 +8,8 @@
     "gulp": "~3.8.11",
     "gulp-jasmine": "~2.0.1",
     "gulp-jasmine-browser": "~0.1.0",
-    "gulp-order": "~1.1.1"
+    "gulp-order": "~1.1.1",
+    "gulp-livereload": "~3.8.0"
   },
   "licenses": [
     {

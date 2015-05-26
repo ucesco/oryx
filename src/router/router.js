@@ -27,12 +27,15 @@
     };
 
     Router.prototype._match = function (url) {
-        var routes = [];
+        var routes = [],
+            hash;
 
         this._parser.href = url;
 
+        hash = this._parser.hash.substring(1, this._parser.hash.length);
+
         for (var i = routes.length - 1; i >= 0; i--) {
-            _matchRoute(this._parser.href, routes[i]) && routes.push(routes[i]);
+            _matchRoute(hash, routes[i]) && routes.push(routes[i]);
         }
 
         return routes;
@@ -47,13 +50,20 @@
     };
 
     Router.prototype._matchStringRoute = function (hash, route) {
-        var result;
+        var rps, re;
 
-        if (route.pattern instanceof RegExp) {
-            re
-        } else {
-            route.pattern === hash;
+        if (hash === route.pattern) {
+            return true;
         }
+
+        rps = route.pattern.replace(/\/[?]{1}:[\w]*/, '(/[\\w]*|[\\w]*|/[\\w]+/|[\\w]+/)');
+        re = new RegExp('^' + rps + '$');
+
+        return re.test(hash);
+    };
+
+    Router.prototype._patternToRegExp = function (pattern) {
+
     };
 
     Router.prototype._onRouteChange = function (e) {

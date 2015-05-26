@@ -66,14 +66,76 @@ describe("Router unit tests", function() {
         });
     });
 
-    describe("Adding New Route", function() {
-        var router = new ox._Router();
+    describe("Matching String Route With Conditional Param ===> users/?:user_id", function() {
+        var router = new ox._Router()
+            pattern = 'users/?:user_id';
 
-        it("should add first parameter string", function() {
-            router.addRoute('route');
-            expect(router._routes['route']).toBeDefined();
+        function test (hash) {
+            return expect(router._matchStringRoute(hash, {pattern: pattern}));
+        }
+
+        it("should match ===> users", function() {
+            test('users').toBe(true);
         });
 
+        it("should match ===> users/", function() {
+            test('users/').toBe(true);
+        });
+
+        it("should match ===> users/1", function() {
+            test('users/1').toBe(true);
+        });
+
+        it("should match ===> users/1/", function() {
+            test('users/1/').toBe(true);
+        });
+
+        it("should match ===> users/avc", function() {
+            test('users/avc').toBe(true);
+        });
+
+        it("should match ===> users/avc/", function() {
+            test('users/avc/').toBe(true);
+        });
+
+        it("should not match ===> users//", function() {
+            test('users//').toBe(false);
+        });
+
+
+        it("should not match ===> users/////", function() {
+            test('users/////').toBe(false);
+        });
+
+
+        it("should not match ===> users/   /", function() {
+            test('users/   /').toBe(false);
+        });
+
+
+        it("should not match ===> users/    ", function() {
+            test('users/    ').toBe(false);
+        });
+
+        it("should not match ===> users   /   /", function() {
+            test('users   /   /').toBe(false);
+        });
+
+        it("should not match ===> users   /2", function() {
+            test('users   /2').toBe(false);
+        });
+
+        it("should not match ===> users   /2/", function() {
+            test('users   /2/').toBe(false);
+        });
+
+        it("should not match ===> users/2/3/", function() {
+            test('users/2/3/').toBe(false);
+        });
+
+        it("should not match ===> users/2/image/1", function() {
+            test('users/2/image/1').toBe(false);
+        });
 
     });
 
